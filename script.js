@@ -2,6 +2,7 @@
 
 // Initial values
 let score = 20;
+let highScore = 0;
 let secretNumber = Math.trunc(Math.random() * 20) + 1;
 document.querySelector('.score').textContent = score;
 
@@ -40,6 +41,11 @@ document.querySelector('.check').addEventListener('click', function () {
 
     // If guess number is the secret number
   } else if (guessNumber === secretNumber) {
+    if (highScore < score) {
+      highScore = score;
+      document.querySelector('.highscore').textContent = highScore;
+    }
+
     document.querySelector('.message').textContent =
       'Correct! You won the game :D';
     document.querySelector('.number').textContent = secretNumber;
