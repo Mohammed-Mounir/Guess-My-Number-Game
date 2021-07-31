@@ -31,6 +31,7 @@ const gameFunc = function (message) {
 
 document.querySelector('.check').addEventListener('click', function () {
   guessNumber = Number(document.querySelector('.guess').value);
+  audio('click');
 
   // If guess number is not between 1 and 20
   if (!guessNumber || guessNumber > 20) {
@@ -39,6 +40,7 @@ document.querySelector('.check').addEventListener('click', function () {
     // If guess number is correct
   } else if (guessNumber === secretNumber) {
     gameFunc('🎉 Correct! You won the game :D');
+    audio('won');
 
     // If guess number is wrong
   } else if (guessNumber !== secretNumber) {
@@ -50,6 +52,7 @@ document.querySelector('.check').addEventListener('click', function () {
       );
     } else if (score === 1) {
       gameFunc('💥 Game Over! You lost the game...');
+      audio('lost');
     }
   }
 });
@@ -60,6 +63,7 @@ document.querySelector('.again').addEventListener('click', function () {
   secretNumber = Math.trunc(Math.random() * 20) + 1;
 
   displayMessage('Start guessing...');
+  audio('reset');
 
   document.querySelector('.score').textContent = score;
   document.querySelector('.number').textContent = '?';
@@ -67,3 +71,17 @@ document.querySelector('.again').addEventListener('click', function () {
   document.querySelector('body').style.backgroundColor = '#222';
   document.querySelector('.number').style.width = '15rem';
 });
+
+const audio = function (x) {
+  let audio = null;
+  if (x === 'won') {
+    audio = document.querySelector('#winning');
+  } else if (x === 'lost') {
+    audio = document.querySelector('#losing');
+  } else if (x === 'click') {
+    audio = document.querySelector('#click');
+  } else if (x === 'reset') {
+    audio = document.querySelector('#reset');
+  }
+  audio.play();
+};
