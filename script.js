@@ -1,11 +1,23 @@
 'use strict';
+
+// Initial values
 let score = 20;
-const secretNumber = Math.trunc(Math.random() * 20) + 1;
-
+let secretNumber = Math.trunc(Math.random() * 20) + 1;
 document.querySelector('.score').textContent = score;
-document.querySelector('.number').textContent = secretNumber;
 
-// Decrementing Score only when score is 1 or higher
+// Reset game
+document.querySelector('.again').addEventListener('click', function () {
+  score = 20;
+  secretNumber = Math.trunc(Math.random() * 20) + 1;
+  document.querySelector('.score').textContent = score;
+  document.querySelector('.number').textContent = '?';
+  document.querySelector('.message').textContent = 'Start guessing...';
+  document.querySelector('.guess').value = '';
+  document.querySelector('body').style.backgroundColor = '#222';
+  document.querySelector('.number').style.width = '15rem';
+});
+
+// Decrementing score only when score is 1 or higher
 const changingScore = function () {
   if (score > 1) {
     score--;
